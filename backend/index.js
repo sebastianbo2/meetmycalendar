@@ -1,11 +1,13 @@
-import express from 'express';
+import express from "express";
 
-const app = express()
+const app = express();
+app.use("cors");
+app.use("json");
 
 app.get("/", (req, res) => {
-    res.send("Hello world!")
-})
+  res.send("Hello world!");
+});
 
 app.listen(8000, () => {
-    console.log("Server is listening");
-})
+  console.log("Server is listening");
+});
