@@ -1,6 +1,5 @@
 import { google } from "googleapis";
-import { addFreeTimesToDB } from "./freeTimes/addFreeTimesToDB";
-import useAuth from "@/hooks/useAuth";
+import {addFreeTimesToDB} from "./freeTimes/addFreeTimesToDB.js"
 
 export const getCalendarData = async (userId, googleToken) => {
   if (googleToken.length == 0) {
@@ -30,8 +29,8 @@ export const getCalendarData = async (userId, googleToken) => {
       orderBy: "startTime",
     });
 
-    addFreeTimesToDB("cm3OvKH4xugL79AYQiI3M8fm9NM2", res.data);
     if (userId) {
+      addFreeTimesToDB(userId, res.data);
     }
 
     console.log("ITEMS: ", res.data.items);

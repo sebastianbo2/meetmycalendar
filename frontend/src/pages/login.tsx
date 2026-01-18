@@ -1,14 +1,11 @@
-"use client";
-
-import { initializeApp, getApps } from "firebase/app";
 import {
-  getAuth,
   signInWithPopup,
   GoogleAuthProvider
 } from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../config/firebase";
+import useAuth from "../hooks/useAuth";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -54,7 +51,22 @@ export default function LoginPage() {
 
       if (googleToken) {
         console.log("Access Token for Google Calendar:", googleToken);
-        navigate("/calendar");
+
+
+        const calendarEventsRes = await fetch("http://localhost:8000/getCalendarData", {
+            method: 'POST',
+            headers: {
+        'Content-Type': 'application/json',
+    },
+          body: JSON.stringify({
+                userId: result.user.uid,
+                googleToken: googleToken,
+            })
+        });
+
+        const calendarEvents = await calendarEventsRes.json();
+
+        navigate("/calendar", { state: { events: calendarEvents}});
         // Tip: Store this token in a secure cookie or state to use for API calls
         alert("Logged in! Check console for your Calendar Access Token.");
       }

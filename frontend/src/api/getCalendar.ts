@@ -2,7 +2,7 @@ import { google } from "googleapis";
 import { addFreeTimesToDB } from "./addFreeTimesToDB";
 import useAuth from "../hooks/useAuth";
 
-export const getCalendarData = async (userId: string, googleToken: string) => {
+export const getCalendarData = async (googleToken: string) => {
   if (googleToken.length == 0) {
     console.log("No token found, exiting...");
     return [];

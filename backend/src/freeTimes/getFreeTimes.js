@@ -4,7 +4,7 @@
  * @returns
  */
 export const getFreeTimes = (busyEvents) => {
-  let freeSlots;
+  let freeSlots = [];
   const now = new Date();
 
   // Ensure they are sorted (crucial for the merging logic)

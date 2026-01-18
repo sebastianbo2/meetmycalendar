@@ -1,8 +1,12 @@
+import { Link } from "react-router-dom";
 
 const Onboarding = () => {
     return (
         <div>
-            Hello world main
+            <p>
+                Hello world main
+            </p>
+            <Link to={"/login"}>Login</Link>
         </div>
     )
 }

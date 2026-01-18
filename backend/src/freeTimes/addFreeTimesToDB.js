@@ -1,8 +1,7 @@
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "@/lib/firebase";
-import { getFreeTimes } from "./getFreeTimes";
+import { db } from "../config/firebase.js"
+import { getFreeTimes } from "./getFreeTimes.js";
 import { calendar_v3 } from "googleapis";
-import { TimeSlot } from "../types";
 
 export const addFreeTimesToDB = async (userId, data) => {
   const events = data.items || [];
