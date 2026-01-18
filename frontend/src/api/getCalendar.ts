@@ -1,14 +1,16 @@
 import { google } from "googleapis";
-import { addFreeTimesToDB } from "./freeTimes/addFreeTimesToDB";
-import useAuth from "@/hooks/useAuth";
+import { addFreeTimesToDB } from "./addFreeTimesToDB";
+import useAuth from "../hooks/useAuth";
 
-export const getCalendarData = async (userId, googleToken) => {
+export const getCalendarData = async (userId: string, googleToken: string) => {
   if (googleToken.length == 0) {
     console.log("No token found, exiting...");
     return [];
   }
 
   console.log("TOKEN: ", googleToken);
+
+  const { user } = useAuth();
 
   // 1. Initialize the Auth client with the token
   const auth = new google.auth.OAuth2();
@@ -30,8 +32,8 @@ export const getCalendarData = async (userId, googleToken) => {
       orderBy: "startTime",
     });
 
-    addFreeTimesToDB("cm3OvKH4xugL79AYQiI3M8fm9NM2", res.data);
-    if (userId) {
+    if (user) {
+      addFreeTimesToDB(user.uid, res.data);
     }
 
     console.log("ITEMS: ", res.data.items);

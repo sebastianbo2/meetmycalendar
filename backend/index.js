@@ -8,6 +8,8 @@ app.get("/", (req, res) => {
   res.send("Hello world!");
 });
 
+app.get("/");
+
 app.listen(8000, () => {
   console.log("Server is listening");
 });
